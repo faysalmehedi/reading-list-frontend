@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-
+import { Books } from "./components/Books";
+import { BookForm } from "./components/BookForm";
+import { Container } from "semantic-ui-react";
+ 
 function App() {
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    fetch('/books').then(response => 
+      response.json().then(data => {
+        setBooks(data.books);
+      })
+      );
+    }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container style={{ marginTop: 40 }}>
+      <BookForm onNewBook={book => setBooks(currentBooks => [book, ...currentBooks])} />
+      <Books books={books}/>
+    </Container>
   );
 }
 
