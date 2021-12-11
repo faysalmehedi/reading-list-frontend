@@ -2,7 +2,7 @@ version: "3.5"
 
 services:
   frontend_server:
-    image: reading-list-frontend
+    image: frontend-2
     build: .
     ports:
       - 3000:3000

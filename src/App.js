@@ -8,7 +8,8 @@ function App() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    fetch('/books').then(response => 
+    console.log(`${process.env.REACT_APP_BACKEND_URL}/books`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/books`).then(response => 
       response.json().then(data => {
         setBooks(data.books);
       })
@@ -24,3 +25,4 @@ function App() {
 }
 
 export default App;
+

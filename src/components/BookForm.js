@@ -36,7 +36,7 @@ export const BookForm = ({ onNewBook }) => {
                 <Button 
                     onClick={async () => {
                     const book = { title, author, rating};
-                    const response = await fetch("/add_book", {
+                    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/add_book`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
