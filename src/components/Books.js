@@ -8,7 +8,7 @@ export const Books = ({ books }) => {
                 return (
                     <List.Item key={book.title}>
                         <Header as='h2' color='violet'>{book.title}</Header>
-                        <Header as='h4'>{book.author}</Header>
+                        <Header as='h4'>by {book.author}</Header>
                         <Rating rating={book.rating} maxRating={5} disabled/>
                     </List.Item>
                 );
