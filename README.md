@@ -10,6 +10,6 @@ $ sudo apt install docker.io
 $ sudo apt install docker-compose
 $ git clone https://github.com/faayam/reading-list-frontend.git
 $ cd reading-list-frontend
-$ echo "REACT_APP_BACKEND_URL=http://localhost:5000" > .env
+$ echo "REACT_APP_BACKEND=http://localhost:5000" > .env
 $ sudo docker-compose up -d
 ```

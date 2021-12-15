@@ -15,6 +15,7 @@ function App() {
       })
       );
     }, [])
+    console.log(books)
 
   return (
     <Container style={{ marginTop: 40 }}>

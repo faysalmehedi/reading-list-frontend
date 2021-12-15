@@ -39,7 +39,8 @@ export const BookForm = ({ onNewBook }) => {
                     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/add_book`, {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json"
+                            "Content-Type": "application/json",
+                            "Access-Control-Allow-Origin": "*"
                         },
                         body: JSON.stringify(book)
                     });
