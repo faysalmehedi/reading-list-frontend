@@ -36,11 +36,17 @@ export const BookForm = ({ onNewBook }) => {
                 <Button 
                     onClick={async () => {
                     const book = { title, author, rating};
-                    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/add_book`, {
+                    // const response = await fetch(`/api/add_book`, {
+                    //     method: "POST",
+                    //     headers: {
+                    //         "Content-Type": "application/json"
+                    //     },
+                    //     body: JSON.stringify(book)
+                    // });
+                    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/add_book`, {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json",
-                            "Access-Control-Allow-Origin": "*"
+                            "Content-Type": "application/json"
                         },
                         body: JSON.stringify(book)
                     });

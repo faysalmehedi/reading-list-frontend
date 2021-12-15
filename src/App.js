@@ -8,14 +8,21 @@ function App() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    console.log(`${process.env.REACT_APP_BACKEND_URL}/books`)
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/books`).then(response => 
+    console.log(`${process.env.REACT_APP_BACKEND_URL}/api/books`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/books`).then(response => 
       response.json().then(data => {
         setBooks(data.books);
       })
       );
     }, [])
     console.log(books)
+    // fetch(`/api/books`).then(response => 
+    //   response.json().then(data => {
+    //     setBooks(data.books);
+    //   })
+    //   );
+    // }, [])
+    // console.log(books)
 
   return (
     <Container style={{ marginTop: 40 }}>
