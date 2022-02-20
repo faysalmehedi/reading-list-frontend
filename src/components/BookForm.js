@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, Rating } from "semantic-ui-react";
+import axios from "axios";
+
 
 export const BookForm = ({ onNewBook }) => {
     const [title, setTitle] = useState('');
@@ -34,29 +36,18 @@ export const BookForm = ({ onNewBook }) => {
             </Form.Field>
             <Form.Field>
                 <Button 
-                    onClick={async () => {
-                    const book = { title, author, rating};
-                    // const response = await fetch(`/api/add_book`, {
-                    //     method: "POST",
-                    //     headers: {
-                    //         "Content-Type": "application/json"
-                    //     },
-                    //     body: JSON.stringify(book)
-                    // });
-                    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/add_book`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(book)
-                    });
+                    onClick={
+                        async () => {
+                            const book = { title, author, rating };
+                            const response = await axios.post(`/api/add_book`, book).then(response => { 
+                                if (response.status === 200) {
+                                    onNewBook(book);
+                                    setTitle('');
+                                    setAuthor('');
+                                    setRating(0);
+                                }
 
-                    if (response.ok) {
-                        onNewBook(book);
-                        setTitle('');
-                        setAuthor('');
-                        setRating(0);
-                    }
+                            })
 
                 }}>
                     Submit

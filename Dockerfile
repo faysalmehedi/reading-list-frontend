@@ -1,18 +1,33 @@
-FROM node:14-slim as build 
-WORKDIR /app 
-COPY package.json . 
-COPY package-lock.json .
-RUN npm install 
-COPY . .
-ARG REACT_APP_BACKEND_URL
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
-RUN npm run build 
+FROM node:15-alpine AS build-stage
+
+RUN apk add --update --no-cache \
+    python \
+    make \
+    g++
+
+COPY . /src
+WORKDIR /src
+COPY ./package* ./
+RUN npm install
+
+RUN yarn build
+
+# FROM nginx:latest
+
+FROM nginx:1.13.0-alpine
+RUN rm -rf /usr/share/nginx/html
+RUN mkdir /usr/share/nginx/html
+COPY --from=build-stage /src/build/ /usr/share/nginx/html/
+
+# COPY default.conf /etc/nginx/conf.d/
+# COPY nginx.conf /etc/nginx/nginx.conf
 
 
-FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
-# new
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN apk add --no-cache nginx-mod-http-perl
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+
 

@@ -3,26 +3,29 @@ import './App.css';
 import { Books } from "./components/Books";
 import { BookForm } from "./components/BookForm";
 import { Container } from "semantic-ui-react";
+import axios from 'axios';
  
 function App() {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    console.log(`${process.env.REACT_APP_BACKEND_URL}/api/books`)
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/books`).then(response => 
-      response.json().then(data => {
-        setBooks(data.books);
-      })
-      );
-    }, [])
+
+    const fetchdata = async () => {
+      try {
+          const { data: response } = await axios.get(`/api/books`);
+          setBooks(response.books);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+
+    fetchdata();
+
+    }, []);
+
     console.log(books)
-    // fetch(`/api/books`).then(response => 
-    //   response.json().then(data => {
-    //     setBooks(data.books);
-    //   })
-    //   );
-    // }, [])
-    // console.log(books)
+
+
 
   return (
     <Container style={{ marginTop: 40 }}>
