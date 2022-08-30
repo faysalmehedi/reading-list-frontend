@@ -12,7 +12,7 @@ variables:
   azureSubscription: 'e20272b1-1580-41bc-bb52-b39cc3472f0a'
 
   # Web app name
-  webAppName: ''
+  webAppName: 'reading-list-front'
 
   # Environment name
   environmentName: 'production'
