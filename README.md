@@ -1,6 +1,6 @@
 # reading-list-frontend
 
-The backend code have written in Flask, find out [here](https://github.com/faayam/reading-list-backend.git)
+The backend code have written in Flask, find out [here](https://github.com/faysalmehedi/reading-list-backend.git)
 
 ### App running instructions:
 
@@ -8,7 +8,7 @@ The backend code have written in Flask, find out [here](https://github.com/faaya
 sudo apt update
 sudo apt install docker.io
 
-git clone https://github.com/faayam/reading-list-frontend.git
+git clone https://github.com/faysalmehedi/reading-list-frontend.git
 cd reading-list-frontend
 
 sudo docker build . -t reading-list-frontend
